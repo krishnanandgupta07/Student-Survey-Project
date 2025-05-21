@@ -65,6 +65,11 @@
             align-items: center;
             gap: 5px;
         }
+		        .error {
+		    color: red;
+		    font-size: 0.9em;
+		    margin-top: 4px;
+}
     </style>
 </head>
 
@@ -82,21 +87,26 @@
                 <div class="form-row">
                     <div class="form-field">
                         <label for="name">1. NAME:</label>
-                        <input type="text" th:field="*{name}" class="form-input" />
+                        <input type="text" th:field="*{name}" class="form-input"  />
+                        <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
                     </div>
                     <div class="form-field">
                         <label for="college">COLLEGE:</label>
                         <input type="text" th:field="*{college}" class="form-input" />
+                        <div class="error" th:if="${#fields.hasErrors('college')}" th:errors="*{college}"></div>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-field">
                         <label for="email">2. EMAIL</label>
-                        <input type="email" th:field="*{email}" class="form-input" />
+                        <input type="email" th:field="*{email}" class="form-input"  />
+                        
+                        <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
                     </div>
                     <div class="form-field">
                         <label for="mobile">Mobile No.</label>
-                        <input type="tel" th:field="*{mobile}" class="form-input" />
+                        <input type="tel" th:field="*{mobile}" class="form-input" pattern="^[6-9]\d{9}$" maxlength="10" required />
+                        <div class="error" th:if="${#fields.hasErrors('mobile')}" th:errors="*{mobile}"></div>
                     </div>
                 </div>
 
@@ -117,11 +127,13 @@
                             <input type="text" th:field="*{otherStream}" class="form-input" style="width: 150px;">
                         </div>
                     </div>
+                    <div class="error" th:if="${#fields.hasErrors('ugStreams')}" th:errors="*{ugStreams}"></div>
                 </div>
 
                 <div class="form-field">
                     <label>4. Age of the Student</label>
                     <input type="text" th:field="*{age}" class="form-input" />
+                    <div class="error" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
                 </div>
 
                 <div class="form-field">
@@ -137,9 +149,10 @@
                             <input type="radio" th:field="*{gender}" value="Transgender" /> Transgender
                         </div>
                     </div>
+                    <div class="error" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></div>
                 </div>
 
-                <!-- Continue the same Thymeleaf conversion for marital status, program, employment, etc. -->
+            
                 
                  <div class="form-field">
                     <label>6. Marital Status</label>
@@ -151,6 +164,7 @@
                             <input type="radio" th:field="*{maritalStatus}" value="Unmarried" /> Unmarried
                         </div>
                     </div>
+                    <div class="error" th:if="${#fields.hasErrors('maritalStatus')}" th:errors="*{maritalStatus}"></div>
                 </div>
 
                 <div class="form-field">
@@ -167,6 +181,7 @@
                             <input type="text" th:field="*{otherProgram}" class="form-input" style="width: 150px;">
                         </div>
                     </div>
+                    <div class="error" th:if="${#fields.hasErrors('program')}" th:errors="*{program}"></div>
                 </div>
 
                 <div class="form-field">
@@ -186,6 +201,7 @@
                             <input type="text" th:field="*{otherEmployment}" class="form-input" style="width: 150px;">
                         </div>
                     </div>
+                    <div class="error" th:if="${#fields.hasErrors('employment')}" th:errors="*{employment}"></div>
                 </div>
                 
                 
@@ -206,6 +222,7 @@
                         <input type="text" th:field="*{otherYearLevel}" class="form-input" style="width: 150px;">
                     </div>
                 </div>
+                <div class="error" th:if="${#fields.hasErrors('yearLevel')}" th:errors="*{yearLevel}"></div>
             </div>
 
             <div class="form-field">
@@ -227,6 +244,7 @@
                         <input type="radio" th:field="*{income}" value="Above 1Lakh" /> Above 1 Lakh
                     </div>
                 </div>
+                <div class="error" th:if="${#fields.hasErrors('income')}" th:errors="*{income}"></div>
             </div>
 
             <div class="form-field">
@@ -242,6 +260,7 @@
                         <input type="radio" th:field="*{location}" value="Semi Urban" /> Semi Urban
                     </div>
                 </div>
+                <div class="error" th:if="${#fields.hasErrors('location')}" th:errors="*{location}"></div>
             </div>
 
             <div class="form-field">
@@ -254,6 +273,7 @@
                         <input type="radio" th:field="*{techAccess}" value="Limited Access" /> Limited Access (Shared device, slow/no internet)
                     </div>
                 </div>
+                <div class="error" th:if="${#fields.hasErrors('techAccess')}" th:errors="*{techAccess}"></div>
             </div>
 
             </div>
@@ -309,12 +329,26 @@
                                         <label><input type="radio" th:field="*{iq01Satisfaction}" value="5">5</label>
                                     </div>
                                 </div>
+                                <div class="error" th:if="${#fields.hasErrors('iq01Satisfaction')}" th:errors="*{iq01Satisfaction}"></div>
                             </td>
                             <td style="border: 1px solid #333; padding: 8px;">
-                                Pre-session briefs <input type="text" class="form-input" style="width: 25px; height: 25px;" th:field="*{iq01Rank1}" min="1" max="4" value="1"> Visual summaries <input type="text" class="form-input" style="width:25px; height: 25px;"  th:field="*{iq01Rank2}" min="1" max="4" value="1"><br>
-                                Live Q&A sessions <input type="text" class="form-input" style="width: 25px; height: 25px;"  th:field="*{iq01Rank3}" min="1" max="4" value="1"> Current Approach is Effective
-                                <input type="text" class="form-input" style="width: 25px; height: 25px;"  th:field="*{iq01Rank4}" min="1" max="4" value="1">
-                            </td>
+						    Pre-session briefs 
+						    <input type="number" class="form-input rank-group" data-group="iq01" style="width: 45px; height: 25px;" 
+						           th:field="*{iq01Rank1}" min="1" max="4" value="1" required>
+						
+						    Visual summaries 
+						    <input type="number" class="form-input rank-group" data-group="iq01" style="width: 45px; height: 25px;" 
+						           th:field="*{iq01Rank2}" min="1" max="4" value="2" required><br>
+						
+						    Live Q&A sessions 
+						    <input type="number" class="form-input rank-group" data-group="iq01" style="width: 45px; height: 25px;" 
+						           th:field="*{iq01Rank3}" min="1" max="4" value="3" required>
+						
+						    Current Approach is Effective 
+						    <input type="number" class="form-input rank-group" data-group="iq01" style="width: 45px; height: 25px;" 
+						           th:field="*{iq01Rank4}" min="1" max="4" value="4" required>
+						</td>
+
                         </tr>
                         <tr>
                             <td style="border: 1px solid #333; padding: 8px; text-align: center; font-weight: bold;">IQ02</td>
@@ -332,13 +366,26 @@
                                         <label><input type="radio" th:field="*{iq02Satisfaction}" value="5">5</label>
                                     </div>
                                 </div>
+                                <div class="error" th:if="${#fields.hasErrors('iq02Satisfaction')}" th:errors="*{iq02Satisfaction}"></div>
                             </td>
                             <td style="border: 1px solid #333; padding: 8px;">
-                                Real-time updates <input type="text" class="form-input"style="width: 25px; height: 25px;" th:field="*{iq02Rank1}" min="1" max="4" value="1"> Personalized syllabus guides
-                               <input type="text" class="form-input" style="width: 25px; height: 25px;" th:field="*{iq02Rank1}" min="1" max="4" value="1"><br>
-                                Supplementary modules <input type="text" class="form-input" style="width: 25px; height: 25px;" th:field="*{iq02Rank3}" min="1" max="4" value="1"> Current Approach is Effective
-                                <input type="text" class="form-input" style="width: 25px; height: 25px;" th:field="*{iq02Rank4}" min="1" max="4" value="1">
-                            </td>
+			    Real-time updates 
+			    <input type="number" class="form-input rank-group" data-group="iq02" 
+			           style="width: 45px; height: 25px;" th:field="*{iq02Rank1}" min="1" max="4" value="1" required> 
+			
+			    Personalized syllabus guides
+			    <input type="number" class="form-input rank-group" data-group="iq02" 
+			           style="width: 45px; height: 25px;" th:field="*{iq02Rank2}" min="1" max="4" value="2" required><br>
+			
+			    Supplementary modules 
+			    <input type="number" class="form-input rank-group" data-group="iq02" 
+			           style="width: 45px; height: 25px;" th:field="*{iq02Rank3}" min="1" max="4" value="3" required> 
+			
+			    Current Approach is Effective
+			    <input type="number" class="form-input rank-group" data-group="iq02" 
+			           style="width: 45px; height: 25px;" th:field="*{iq02Rank4}" min="1" max="4" value="4" required>
+</td>
+
                         </tr>
                         <tr>
                             <td style="border: 1px solid #333; padding: 8px; text-align: center; font-weight: bold;">IQ03</td>
@@ -355,11 +402,26 @@
                                         <label><input type="radio" th:field="*{iq03Satisfaction}" value="5">5</label>
                                     </div>
                                 </div>
+                                <div class="error" th:if="${#fields.hasErrors('iq03Satisfaction')}" th:errors="*{iq03Satisfaction}"></div>
                             </td>
                             <td style="border: 1px solid #333; padding: 8px;">
-                                Recorded sessions <input type="text" class="form-input" style="width: 25px; height: 25px;" th:field="*{iq03Rank1}" min="1" max="4" value="1"> Classroom evaluations <input type="text" class="form-input" style="width: 25px; height: 25px;" th:field="*{iq03Rank2}" min="1" max="4" value="1"><br>
-                                Q&A follow-ups <input type="text" class="form-input" style="width: 25px; height: 25px;" th:field="*{iq03Rank3}" min="1" max="4" value="1"> Current Approach is Effective <input type="text" class="form-input" style="width: 25px; height: 25px;" th:field="*{iq03Rank4}" min="1" max="4" value="1">
-                            </td>
+								    Recorded sessions 
+								    <input type="number" class="form-input rank-group" data-group="iq03" 
+								           style="width: 45px; height: 25px;" th:field="*{iq03Rank1}" min="1" max="4" value="1" required>
+								
+								    Classroom evaluations 
+								    <input type="number" class="form-input rank-group" data-group="iq03" 
+								           style="width: 45px; height: 25px;" th:field="*{iq03Rank2}" min="1" max="4" value="2" required><br>
+								
+								    Q&A follow-ups 
+								    <input type="number" class="form-input rank-group" data-group="iq03" 
+								           style="width: 45px; height: 25px;" th:field="*{iq03Rank3}" min="1" max="4" value="3" required>
+								
+								    Current Approach is Effective 
+								    <input type="number" class="form-input rank-group" data-group="iq03" 
+								           style="width: 45px; height: 25px;" th:field="*{iq03Rank4}" min="1" max="4" value="4" required>
+								</td>
+
                         </tr>
                         <tr>
                             <td style="border: 1px solid #333; padding: 8px; text-align: center; font-weight: bold;">IQ04</td>
@@ -376,12 +438,26 @@
                                         <label><input type="radio" th:field="*{iq04Satisfaction}" value="5">5</label>
                                     </div>
                                 </div>
+                                <div class="error" th:if="${#fields.hasErrors('iq04Satisfaction')}" th:errors="*{iq04Satisfaction}"></div>
                             </td>
                             <td style="border: 1px solid #333; padding: 8px;">
-                                Clear grading rules <input type="text" class="form-input" style="width: 25px; height: 25px;" th:field="*{iq04Rank1}" min="1" max="4" value="1"> Peer-review insights<input type="text" class="form-input" style="width: 25px; height: 25px;" th:field="*{iq04Rank2}" min="1" max="4" value="1">
-                                OCR-based<br>
-                                answer checking <input type="text" class="form-input" style="width: 25px; height: 25px;" th:field="*{iq04Rank3}" min="1" max="4" value="1"> Current Approach is Effective <input type="text" class="form-input" style="width: 25px; height: 25px;" th:field="*{iq04Rank4}" min="1" max="4" value="1">
-                            </td>
+							    Clear grading rules 
+							    <input type="number" class="form-input rank-group" data-group="iq04"
+							           style="width: 45px; height: 25px;" th:field="*{iq04Rank1}" min="1" max="4" value="1" required>
+							
+							    Peer-review insights
+							    <input type="number" class="form-input rank-group" data-group="iq04"
+							           style="width: 45px; height: 25px;" th:field="*{iq04Rank2}" min="1" max="4" value="2" required><br>
+							
+							    OCR-based answer checking 
+							    <input type="number" class="form-input rank-group" data-group="iq04"
+							           style="width: 45px; height: 25px;" th:field="*{iq04Rank3}" min="1" max="4" value="3" required>
+							
+							    Current Approach is Effective 
+							    <input type="number" class="form-input rank-group" data-group="iq04"
+							           style="width: 45px; height: 25px;" th:field="*{iq04Rank4}" min="1" max="4" value="4" required>
+							</td>
+
                         </tr>
                         <tr>
                             <td style="border: 1px solid #333; padding: 8px; text-align: center; font-weight: bold;">IQ05</td>
@@ -399,13 +475,26 @@
                                         <label><input type="radio" th:field="*{iq05Satisfaction}" value="5">5</label>
                                     </div>
                                 </div>
+                                <div class="error" th:if="${#fields.hasErrors('iq05Satisfaction')}" th:errors="*{iq05Satisfaction}"></div>
                             </td>
                             <td style="border: 1px solid #333; padding: 8px;">
-                                Faculty-led seminars <input type="text" class="form-input" style="width: 25px; height: 25px;" th:field="*{iq05Rank1}" min="1" max="4" value="1"> Group case projects <input type="text" class="form-input" style="width: 25px; height: 25px;" th:field="*{iq05Rank2}" min="1" max="4" value="1">
-                                Workshops<br>
-                                on how to do projects/research <input type="text" class="form-input" style="width: 25px; height: 25px;" th:field="*{iq05Rank3}" min="1" max="4" value="1"> Current Approach is Effective
-                               <input type="text" class="form-input" style="width: 25px; height: 25px;" th:field="*{iq05Rank4}" min="1" max="4" value="1">
-                            </td>
+							    Faculty-led seminars 
+							    <input type="number" class="form-input rank-group" data-group="iq05" 
+							           style="width: 45px; height: 25px;" th:field="*{iq05Rank1}" min="1" max="4" value="1" required>
+							
+							    Group case projects 
+							    <input type="number" class="form-input rank-group" data-group="iq05" 
+							           style="width: 45px; height: 25px;" th:field="*{iq05Rank2}" min="1" max="4" value="2" required><br>
+							
+							    Workshops on how to do projects/research 
+							    <input type="number" class="form-input rank-group" data-group="iq05" 
+							           style="width: 45px; height: 25px;" th:field="*{iq05Rank3}" min="1" max="4" value="3" required>
+							
+							    Current Approach is Effective 
+							    <input type="number" class="form-input rank-group" data-group="iq05" 
+							           style="width: 45px; height: 25px;" th:field="*{iq05Rank4}" min="1" max="4" value="4" required>
+							</td>
+
                         </tr>
                         <tr>
                             <td style="border: 1px solid #333; padding: 8px; text-align: center; font-weight: bold;">IQ06</td>
@@ -423,13 +512,26 @@
                                         <label><input type="radio" th:field="*{iq06Satisfaction}" value="5">5</label>
                                     </div>
                                 </div>
+                                <div class="error" th:if="${#fields.hasErrors('iq06Satisfaction')}" th:errors="*{iq06Satisfaction}"></div>
                             </td>
-                            <td style="border: 1px solid #333; padding: 8px;">
-                                Real-time dashboards <input type="text" class="form-input" style="width: 25px; height: 25px;" th:field="*{iq06Rank1}" min="1" max="4" value="1"> Periodic progress reports
-<input type="text" class="form-input" style="width: 25px; height: 25px;" th:field="*{iq06Rank2}" min="1" max="4" value="1"><br>
-                                Student advisory meetings<input type="text" class="form-input" style="width: 25px; height: 25px;" th:field="*{iq06Rank3}" min="1" max="4" value="1"> Current Approach is Effective
-                                <input type="text" class="form-input" style="width: 25px; height: 25px;" th:field="*{iq06Rank4}" min="1" max="4" value="1">
-                            </td>
+                                <td style="border: 1px solid #333; padding: 8px;">
+									    Real-time dashboards 
+									    <input type="number" class="form-input rank-group" data-group="iq06" 
+									           style="width: 45px; height: 25px;" th:field="*{iq06Rank1}" min="1" max="4" value="1" required>
+									
+									    Periodic progress reports
+									    <input type="number" class="form-input rank-group" data-group="iq06" 
+									           style="width: 45px; height: 25px;" th:field="*{iq06Rank2}" min="1" max="4" value="2" required><br>
+									
+									    Student advisory meetings
+									    <input type="number" class="form-input rank-group" data-group="iq06" 
+									           style="width: 45px; height: 25px;" th:field="*{iq06Rank3}" min="1" max="4" value="3" required>
+									
+									    Current Approach is Effective
+									    <input type="number" class="form-input rank-group" data-group="iq06" 
+									           style="width: 45px; height: 25px;" th:field="*{iq06Rank4}" min="1" max="4" value="4" required>
+									</td>
+
                         </tr>
                     </tbody>
                 </table>
@@ -468,12 +570,25 @@
                                         <label><input type="radio" th:field="*{rlfb01Satisfaction}" value="5">5</label>
                                     </div>
                                 </div>
+                                <div class="error" th:if="${#fields.hasErrors('rlfb01Satisfaction')}" th:errors="*{rlfb01Satisfaction}"></div>
                             </td>
                             <td style="border: 1px solid #333; padding: 8px;">
-                                Faster feedback turnaround <input type="text" class="form-input" style="width: 25px; height: 25px;" th:field="*{rlfb01Rank1}" min="1" max="4" value="1" > Online feedback<br>
-                                access <input type="text" class="form-input" style="width: 25px; height: 25px;" th:field="*{rlfb01Rank2}" min="1" max="4" value="1"> Clear /expectations shared <input type="text" class="form-input" style="width: 25px; height: 25px;" th:field="*{rlfb01Rank3}" min="1" max="4" value="1"> Current<br>
-                                Approach is Effective <input type="text" class="form-input" style="width: 25px; height: 25px;" th:field="*{rlfb01Rank4}" min="1" max="4" value="1">
-                            </td>
+							    Faster feedback turnaround 
+							    <input type="number" class="form-input rank-input" style="width: 45px; height: 25px;"
+							           th:field="*{rlfb01Rank1}" min="1" max="4" value="1" required><br>
+							
+							    Online feedback access 
+							    <input type="number" class="form-input rank-input" style="width: 45px; height: 25px;"
+							           th:field="*{rlfb01Rank2}" min="1" max="4" value="2" required><br>
+							
+							    Clear expectations shared 
+							    <input type="number" class="form-input rank-input" style="width: 45px; height: 25px;"
+							           th:field="*{rlfb01Rank3}" min="1" max="4" value="3" required><br>
+							
+							    Current approach is effective 
+							    <input type="number" class="form-input rank-input" style="width: 45px; height: 25px;"
+							           th:field="*{rlfb01Rank4}" min="1" max="4" value="4" required>
+							</td>
                         </tr>
                     </tbody>
                 </table>
@@ -487,6 +602,27 @@
             </div>
         </form>
     </div>
+    
+    
+    <script>
+    document.querySelectorAll('.rank-group').forEach(input => {
+        input.addEventListener('input', () => {
+            const group = input.getAttribute('data-group');
+            const allInGroup = document.querySelectorAll(`.rank-group[data-group='${group}']`);
+
+            // collect current values
+            const values = Array.from(allInGroup).map(el => el.value);
+            const duplicates = values.filter((val, i, arr) => val && arr.indexOf(val) !== i);
+
+            if (duplicates.length > 0) {
+                alert(`Duplicate value "${duplicates[0]}" in group "${group}" not allowed. Each rank must be unique.`);
+                input.value = '';
+                input.focus();
+            }
+        });
+    });
+</script>
+    
 </body>
 
 </html>

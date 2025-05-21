@@ -1,8 +1,10 @@
 package com.king.service;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.king.dto.StudentSurveyDTO;
 import com.king.entity.StudentSurvey;
 import com.king.repository.StudentSurveyRepository;
 
@@ -11,6 +13,12 @@ public class StudentSurveyService {
 	
 	@Autowired
     private StudentSurveyRepository repository;
+	
+	public StudentSurvey convertToEntity(StudentSurveyDTO dto) {
+        StudentSurvey entity = new StudentSurvey();
+        BeanUtils.copyProperties(dto, entity);
+        return entity;
+    }
 
     public StudentSurvey saveSurvey(StudentSurvey survey) {
         return repository.save(survey);

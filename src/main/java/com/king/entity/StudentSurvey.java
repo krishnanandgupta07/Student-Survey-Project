@@ -1,5 +1,5 @@
 package com.king.entity;
-import java.util.Map;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,13 +13,13 @@ public class StudentSurvey {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
     private String name;
     private String college;
     private String email;
     private String mobile;
-    private String ugStreams;
-    private String age;
+    private List<String> ugStreams;
+    private Integer age;
     private String gender;
     private String maritalStatus;
     private String program;
@@ -28,10 +28,11 @@ public class StudentSurvey {
     private String income;
     private String location;
     private String techAccess;
+
+   
     
 //    private Map<String, Integer> satisfaction; // IQ01 -> 4, etc.
 //    private Map<String, Map<String, Integer>> improvementRanks; // IQ01 -> {option1: 1, option2: 2, ...}
-    
     
     private Integer iq01Satisfaction;
     private Integer iq01Rank1;

@@ -1,5 +1,14 @@
 package com.king.dto;
 
+import java.util.List;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,20 +18,50 @@ public class StudentSurveyDTO {
 	
 	private Long id;
 
-    private String name;
-    private String college;
-    private String email;
-    private String mobile;
-    private String ugStreams;
-    private String age;
-    private String gender;
-    private String maritalStatus;
-    private String program;
-    private String employment;
-    private String yearLevel;
-    private String income;
-    private String location;
-    private String techAccess;
+	 @NotBlank(message = "Name is required")
+	    private String name;
+
+	    @NotBlank(message = "College name is required")
+	    private String college;
+
+	    @Email(message = "Please enter a valid email")
+	    @NotBlank(message = "Email is required")
+	    private String email;
+
+	    @Pattern(regexp = "^[6-9]\\d{9}$", message = "Enter a valid 10-digit mobile number")
+	    private String mobile;
+
+	    @NotEmpty(message = "Please select your UG stream")
+	    private List<String> ugStreams;
+
+	    @NotNull(message = "Please enter your age")
+	    @Min(value = 15, message = "Age must be at least 15")
+	    @Max(value = 100, message = "Age must be less than 100")
+	    private Integer age;
+
+	    @NotBlank(message = "Please select your gender")
+	    private String gender;
+
+	    @NotBlank(message = "Please select your marital status")
+	    private String maritalStatus;
+
+	    @NotBlank(message = "Please select your program")
+	    private String program;
+
+	    @NotBlank(message = "Please select your employment status")
+	    private String employment;
+
+	    @NotBlank(message = "Please select your year level")
+	    private String yearLevel;
+
+	    @NotBlank(message = "Please select your income range")
+	    private String income;
+
+	    @NotBlank(message = "Please select your geographical location")
+	    private String location;
+
+	    @NotBlank(message = "Please select your access to technology")
+	    private String techAccess;
     
     private String otherStream;
     private String otherProgram;
@@ -30,46 +69,50 @@ public class StudentSurveyDTO {
     private String otherYearLevel;
     
     
+    @NotNull(message = "Please select a satisfaction rating")
     private Integer iq01Satisfaction;
     private Integer iq01Rank1;
     private Integer iq01Rank2;
     private Integer iq01Rank3;
     private Integer iq01Rank4;
-
+    @NotNull(message = "Please select a satisfaction rating")
     private Integer iq02Satisfaction;
     private Integer iq02Rank1;
     private Integer iq02Rank2;
     private Integer iq02Rank3;
     private Integer iq02Rank4;
-
+    @NotNull(message = "Please select a satisfaction rating")
     private Integer iq03Satisfaction;
     private Integer iq03Rank1;
     private Integer iq03Rank2;
     private Integer iq03Rank3;
     private Integer iq03Rank4;
-
+    @NotNull(message = "Please select a satisfaction rating")
     private Integer iq04Satisfaction;
     private Integer iq04Rank1;
     private Integer iq04Rank2;
     private Integer iq04Rank3;
     private Integer iq04Rank4;
-
+    @NotNull(message = "Please select a satisfaction rating")
     private Integer iq05Satisfaction;
     private Integer iq05Rank1;
     private Integer iq05Rank2;
     private Integer iq05Rank3;
     private Integer iq05Rank4;
-
+    @NotNull(message = "Please select a satisfaction rating")
     private Integer iq06Satisfaction;
     private Integer iq06Rank1;
     private Integer iq06Rank2;
     private Integer iq06Rank3;
     private Integer iq06Rank4;
-
+    @NotNull(message = "Please select a satisfaction rating")
     private Integer rlfb01Satisfaction;
     private Integer rlfb01Rank1;
     private Integer rlfb01Rank2;
     private Integer rlfb01Rank3;
     private Integer rlfb01Rank4;
+    
+    
+   
 
 }
