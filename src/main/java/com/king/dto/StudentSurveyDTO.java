@@ -30,46 +30,46 @@ public class StudentSurveyDTO {
     private String otherYearLevel;
     
     
-    private int iq01Satisfaction;
-    private int iq01Rank1;
-    private int iq01Rank2;
-    private int iq01Rank3;
-    private int iq01Rank4;
+    private Integer iq01Satisfaction;
+    private Integer iq01Rank1;
+    private Integer iq01Rank2;
+    private Integer iq01Rank3;
+    private Integer iq01Rank4;
 
-    private int iq02Satisfaction;
-    private int iq02Rank1;
-    private int iq02Rank2;
-    private int iq02Rank3;
-    private int iq02Rank4;
+    private Integer iq02Satisfaction;
+    private Integer iq02Rank1;
+    private Integer iq02Rank2;
+    private Integer iq02Rank3;
+    private Integer iq02Rank4;
 
-    private int iq03Satisfaction;
-    private int iq03Rank1;
-    private int iq03Rank2;
-    private int iq03Rank3;
-    private int iq03Rank4;
+    private Integer iq03Satisfaction;
+    private Integer iq03Rank1;
+    private Integer iq03Rank2;
+    private Integer iq03Rank3;
+    private Integer iq03Rank4;
 
-    private int iq04Satisfaction;
-    private int iq04Rank1;
-    private int iq04Rank2;
-    private int iq04Rank3;
-    private int iq04Rank4;
+    private Integer iq04Satisfaction;
+    private Integer iq04Rank1;
+    private Integer iq04Rank2;
+    private Integer iq04Rank3;
+    private Integer iq04Rank4;
 
-    private int iq05Satisfaction;
-    private int iq05Rank1;
-    private int iq05Rank2;
-    private int iq05Rank3;
-    private int iq05Rank4;
+    private Integer iq05Satisfaction;
+    private Integer iq05Rank1;
+    private Integer iq05Rank2;
+    private Integer iq05Rank3;
+    private Integer iq05Rank4;
 
-    private int iq06Satisfaction;
-    private int iq06Rank1;
-    private int iq06Rank2;
-    private int iq06Rank3;
-    private int iq06Rank4;
+    private Integer iq06Satisfaction;
+    private Integer iq06Rank1;
+    private Integer iq06Rank2;
+    private Integer iq06Rank3;
+    private Integer iq06Rank4;
 
-    private int rlfb01Satisfaction;
-    private int rlfb01Rank1;
-    private int rlfb01Rank2;
-    private int rlfb01Rank3;
-    private int rlfb01Rank4;
+    private Integer rlfb01Satisfaction;
+    private Integer rlfb01Rank1;
+    private Integer rlfb01Rank2;
+    private Integer rlfb01Rank3;
+    private Integer rlfb01Rank4;
 
 }
