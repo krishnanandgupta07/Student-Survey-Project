@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.king.dto.StudentSurveyDTO;
+import com.king.dto.SurveyResponseDTO;
 import com.king.entity.StudentSurvey;
 import com.king.service.StudentSurveyService;
+import com.king.service.SurveyResponseService;
 
 import jakarta.validation.Valid;
 
@@ -18,24 +20,32 @@ import jakarta.validation.Valid;
 public class SurveyController {
 
     @Autowired
-    private StudentSurveyService service;
+    private StudentSurveyService studentService;
+    @Autowired
+    private SurveyResponseService respService;
 
     @GetMapping("/")
-    public String showForm(Model model) {
-        model.addAttribute("survey", new StudentSurveyDTO());
+    public String showSurveyForm(Model model) {
+        model.addAttribute("surveyStudent", new StudentSurveyDTO());
+        model.addAttribute("surveyResponse", new SurveyResponseDTO());
         return "student-form";
     }
 
     @PostMapping("/submit")
-    public String submitSurvey(@Valid @ModelAttribute("survey") StudentSurveyDTO dto,BindingResult result, Model model) {
-    	
-    	if (result.hasErrors()) {
-            return "student-form";
-        }
-    	//converting dto to entity
-    	StudentSurvey survey = service.convertToEntity(dto);
-        service.saveSurvey(survey);
-        model.addAttribute("message", "Survey submitted successfully!");
-        return "thank-you";
+    public String submitSurveyForm(
+            @ModelAttribute("surveyStudent") @Valid StudentSurveyDTO studentDTO,
+            BindingResult studentResult,
+            @ModelAttribute("surveyResponse") @Valid SurveyResponseDTO responseDTO,
+            BindingResult responseResult,
+            Model model) {
+
+			        if (studentResult.hasErrors() || responseResult.hasErrors()) {
+			            return "student-form";
+			        }
+
+			        StudentSurvey savedStudent = studentService.saveSurvey(studentDTO);
+			        respService.saveSurveyResponse(responseDTO, savedStudent);
+			        model.addAttribute("message", "Survey submitted successfully!");
+			        return "thank-you"; 
     }
 }
