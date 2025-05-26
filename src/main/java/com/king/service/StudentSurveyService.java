@@ -15,8 +15,9 @@ public class StudentSurveyService {
     private StudentSurveyRepository studentRepository;
     
     public StudentSurvey saveSurvey(StudentSurveyDTO dto) {
-        StudentSurvey student = new StudentSurvey();
-        BeanUtils.copyProperties(dto, student);
+    	//convert dto to entity
+	        StudentSurvey student = new StudentSurvey();
+	        BeanUtils.copyProperties(dto, student);
         	//logic for others option along with text box details
 	       student.setUgStreams(resolveOtherValue(dto.getUgStreams(), dto.getOtherStream()));
 	       student.setProgram(resolveOtherValue(dto.getProgram(), dto.getOtherProgram()));

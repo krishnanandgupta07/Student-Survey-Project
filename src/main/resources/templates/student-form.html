@@ -70,60 +70,77 @@
 		    font-size: 0.9em;
 		    margin-top: 4px;
 }
+
+	.form-fieldset{
+			border: none;	
+	}
     </style>
 </head>
 
 <body>
+
+	<div style="text-align: right;">
+    <a th:href="@{?lang=en}">English</a> | 
+    <a th:href="@{?lang=hi_IN}">हिन्दी</a> | 
+    <a th:href="@{?lang=mr_IN}">मराठी</a> | 
+    <a th:href="@{?lang=te_IN}">తెలుగు</a> | 
+    <a th:href="@{?lang=gu_IN}">ગુજરાતી</a>
+	</div>
     <div class="form-container">
         <div class="form-header-box">
-            <span style="font-weight: bold;">TITLE: "EXPLORING SATISFACTION DRIVERS AMONG STUDENTS IN HIGHER EDUCATION INSTITUTIONS (HEI)"</span>
-            <p>Your responses will remain confidential and used only for academic analysis. This survey takes 10–12 minutes to complete. Participation is voluntary.</p>
+            <span style="font-weight: bold;" th:text="#{form.title}">TITLE: "EXPLORING SATISFACTION DRIVERS AMONG STUDENTS IN HIGHER EDUCATION INSTITUTIONS (HEI)"</span>
+            <p th:text="#{form.description}">Your responses will remain confidential and used only for academic analysis. This survey takes 10–12 minutes to complete. Participation is voluntary.</p>
         </div>
 
         <form th:action="@{/submit}" th:object="${surveyStudent}" method="post">
-            <div class="form-header">PART - I STUDENT INFORMATION</div>
+            <div class="form-header" th:text="#{form.part1}">PART - I STUDENT INFORMATION</div>
 
             <div class="form-section">
                 <div class="form-row">
                     <div class="form-field">
-                        <label for="name">1. NAME:</label>
+                        
+                        <label th:text="#{form.name}">1. NAME:</label>
                         <input type="text" th:field="*{name}" class="form-input"  />
                         <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
                     </div>
                     <div class="form-field">
-                        <label for="college">COLLEGE:</label>
+                        <label th:text="#{form.college}">COLLEGE:</label>
                         <input type="text" th:field="*{college}" class="form-input" />
                         <div class="error" th:if="${#fields.hasErrors('college')}" th:errors="*{college}"></div>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-field">
-                        <label for="email">2. EMAIL</label>
+                        <label th:text="#{form.email}">2. EMAIL</label>
                         <input type="email" th:field="*{email}" class="form-input"  />
                         
                         <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
                     </div>
                     <div class="form-field">
-                        <label for="mobile">Mobile No.</label>
+                        <label th:text="#{form.mobile}">Mobile No.</label>
                         <input type="tel" th:field="*{mobile}" class="form-input" pattern="^[6-9]\d{9}$" maxlength="10" required />
                         <div class="error" th:if="${#fields.hasErrors('mobile')}" th:errors="*{mobile}"></div>
                     </div>
                 </div>
 
                 <div class="form-field">
-                    <label>3. What is your stream at the Undergraduate (UG) level?</label>
+                    <label th:text="#{form.ugStreams}">3. What is your stream at the Undergraduate (UG) level?</label>
                     <div class="radio-group">
                         <div class="radio-option">
-                            <input type="radio" th:field="*{ugStreams}" value="PCM" /> PCM
+                            <input type="radio" th:field="*{ugStreams}" value="PCM" /> 
+                            <span th:text="#{ugStreams.pcm}">PCM</span>
                         </div>
                         <div class="radio-option">
-                            <input type="radio" th:field="*{ugStreams}" value="PCB" /> PCB
+                            <input type="radio" th:field="*{ugStreams}" value="PCB" />
+                            <span th:text="#{ugStreams.pcb}">PCB</span> 
                         </div>
                         <div class="radio-option">
-                            <input type="radio" th:field="*{ugStreams}" value="Arts" /> Arts / Commerce
+                            <input type="radio" th:field="*{ugStreams}" value="Arts" />
+                            <span th:text="#{ugStreams.arts}"> Arts / Commerce</span>
                         </div>
                         <div class="radio-option">
-                            <input type="radio" th:field="*{ugStreams}" value="Others" /> Others
+                            <input type="radio" th:field="*{ugStreams}" value="Others" /> 
+                            <span th:text="#{ugStreams.others}"> Others</span>
                             <input type="text" th:field="*{otherStream}" class="form-input" style="width: 150px;">
                         </div>
                     </div>
@@ -131,53 +148,62 @@
                 </div>
 
                 <div class="form-field">
-                    <label>4. Age of the Student</label>
+                    <label th:text="#{form.age}">4. Age of the Student</label>
                     <input type="text" th:field="*{age}" class="form-input" />
                     <div class="error" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
                 </div>
 
-                <div class="form-field">
-                    <label>5. Gender of the Student?</label>
-                    <div class="radio-group">
-                        <div class="radio-option">
-                            <input type="radio" th:field="*{gender}" value="Male" /> Male
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" th:field="*{gender}" value="Female" /> Female
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" th:field="*{gender}" value="Transgender" /> Transgender
-                        </div>
-                    </div>
-                    <div class="error" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></div>
-                </div>
+			<div class="form-field">
+				    <label th:text="#{form.gender}">5. Gender of the Student?</label>
+				    <div class="radio-group">
+				        <div class="radio-option">
+				            <input type="radio" th:field="*{gender}" value="Male" /> 
+				            <span th:text="#{gender.male}">Male</span>
+				        </div>
+				        <div class="radio-option">
+				            <input type="radio" th:field="*{gender}" value="Female" /> 
+				            <span th:text="#{gender.female}">Female</span>
+				        </div>
+				        <div class="radio-option">
+				            <input type="radio" th:field="*{gender}" value="Transgender" /> 
+				            <span th:text="#{gender.transgender}">Transgender</span> 
+				        </div>
+				    </div>
+				    <div class="error" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></div>
+				</div>
+
 
             
                 
                  <div class="form-field">
-                    <label>6. Marital Status</label>
+                    <label th:text="#{form.maritalStatus}">6. Marital Status</label>
                     <div class="radio-group">
                         <div class="radio-option">
-                            <input type="radio" th:field="*{maritalStatus}" value="Married" /> Married
+                            <input type="radio" th:field="*{maritalStatus}" value="Married" />
+                            <span th:text="#{maritalStatus.married}"> Married</span> 
                         </div>
                         <div class="radio-option">
-                            <input type="radio" th:field="*{maritalStatus}" value="Unmarried" /> Unmarried
+                            <input type="radio" th:field="*{maritalStatus}" value="Unmarried" /> 
+                            <span th:text="#{maritalStatus.unmarried}"> Unmarried</span>
                         </div>
                     </div>
                     <div class="error" th:if="${#fields.hasErrors('maritalStatus')}" th:errors="*{maritalStatus}"></div>
                 </div>
 
                 <div class="form-field">
-                    <label>7. Course/Program you are studying?</label>
+                    <label th:text="#{form.program}">7. Course/Program you are studying?</label>
                     <div class="radio-group">
                         <div class="radio-option">
-                            <input type="radio" th:field="*{program}" value="Graduate" /> Graduate
+                            <input type="radio" th:field="*{program}" value="Graduate" /> 
+                            <span th:text="#{program.graduate}">Graduate</span>
                         </div>
                         <div class="radio-option">
-                            <input type="radio" th:field="*{program}" value="Post Graduate" /> Post Graduate
+                            <input type="radio" th:field="*{program}" value="Post Graduate" />
+                            <span th:text="#{program.postgraduate}">Post Graduate</span>
                         </div>
                         <div class="radio-option">
-                            <input type="radio" th:field="*{program}" value="Others" /> Others
+                            <input type="radio" th:field="*{program}" value="Others" />
+                            <span th:text="#{program.others}">Others</span>
                             <input type="text" th:field="*{otherProgram}" class="form-input" style="width: 150px;">
                         </div>
                     </div>
@@ -185,19 +211,23 @@
                 </div>
 
                 <div class="form-field">
-                    <label>8. Employment Status</label>
+                    <label th:text="#{form.employment}">8. Employment Status</label>
                     <div class="radio-group">
                         <div class="radio-option">
-                            <input type="radio" th:field="*{employment}" value="Not Employed" /> Not Employed / Full-time Student
+                            <input type="radio" th:field="*{employment}" value="Not Employed" />
+                            <span th:text="#{employment.notEmployed}">Not Employed / Full-time Student</span> 
                         </div>
                         <div class="radio-option">
-                            <input type="radio" th:field="*{employment}" value="Private" /> Private Employee
+                            <input type="radio" th:field="*{employment}" value="Private" />
+                            <span th:text="#{employment.private}">Private Employee</span> 
                         </div>
                         <div class="radio-option">
-                            <input type="radio" th:field="*{employment}" value="Business" /> Business
+                            <input type="radio" th:field="*{employment}" value="Business" />
+                            <span th:text="#{employment.business}">Business</span>
                         </div>
                         <div class="radio-option">
-                            <input type="radio" th:field="*{employment}" value="Others" /> Others
+                            <input type="radio" th:field="*{employment}" value="Others" />
+                            <span th:text="#{employment.others}">Others</span> 
                             <input type="text" th:field="*{otherEmployment}" class="form-input" style="width: 150px;">
                         </div>
                     </div>
@@ -206,19 +236,23 @@
                 
                 
                  <div class="form-field">
-                <label>9. Year Level / Class Level</label>
+                <label th:text="#{form.yearLevel}">9. Year Level / Class Level</label>
                 <div class="radio-group">
                     <div class="radio-option">
-                        <input type="radio" th:field="*{yearLevel}" value="1st Year" /> 1st Year
+                        <input type="radio" th:field="*{yearLevel}" value="1st Year" /> 
+                        <span th:text="#{yearLevel.first}">1st Year</span>
                     </div>
                     <div class="radio-option">
-                        <input type="radio" th:field="*{yearLevel}" value="2nd Year" /> 2nd Year
+                        <input type="radio" th:field="*{yearLevel}" value="2nd Year" />
+                        <span th:text="#{yearLevel.second}">2nd Year</span> 
                     </div>
                     <div class="radio-option">
-                        <input type="radio" th:field="*{yearLevel}" value="Final Year" /> Final Year
+                        <input type="radio" th:field="*{yearLevel}" value="Final Year" />
+                        <span th:text="#{yearLevel.final}"> Final Year</span>
                     </div>
                     <div class="radio-option">
-                        <input type="radio" th:field="*{yearLevel}" value="Others" /> Others
+                        <input type="radio" th:field="*{yearLevel}" value="Others" /> 
+                        <span th:text="#{yearLevel.others}">Others</span>
                         <input type="text" th:field="*{otherYearLevel}" class="form-input" style="width: 150px;">
                     </div>
                 </div>
@@ -226,51 +260,61 @@
             </div>
 
             <div class="form-field">
-                <label>10. Average Monthly Family Income</label>
+                <label th:text="#{form.income}">10. Average Monthly Family Income</label>
                 <div class="radio-group">
                     <div class="radio-option">
-                        <input type="radio" th:field="*{income}" value="Below 15000" /> Below 15000
+                        <input type="radio" th:field="*{income}" value="Below 15000" />
+                        <span th:text="#{income.below15000}">Below 15000</span> 
                     </div>
                     <div class="radio-option">
-                        <input type="radio" th:field="*{income}" value="16000-25000" /> 16000-25000
+                        <input type="radio" th:field="*{income}" value="16000-25000" />
+                        <span th:text="#{income.16000to25000}">16000-25000</span> 
                     </div>
                     <div class="radio-option">
-                        <input type="radio" th:field="*{income}" value="26000-50000" /> 26000-50000
+                        <input type="radio" th:field="*{income}" value="26000-50000" /> 
+                        <span th:text="#{income.26000to50000}">26000-50000</span>
                     </div>
                     <div class="radio-option">
-                        <input type="radio" th:field="*{income}" value="51000-1Lakh" /> 51000-1 Lakh
+                        <input type="radio" th:field="*{income}" value="51000-1Lakh" />
+                        <span th:text="#{income.51000to1lakh}">51000-1 Lakh</span> 
                     </div>
                     <div class="radio-option">
-                        <input type="radio" th:field="*{income}" value="Above 1Lakh" /> Above 1 Lakh
+                        <input type="radio" th:field="*{income}" value="Above 1Lakh" />
+                        <span th:text="#{income.51000to1lakh}">Above 1 Lakh</span> 
                     </div>
                 </div>
                 <div class="error" th:if="${#fields.hasErrors('income')}" th:errors="*{income}"></div>
             </div>
 
             <div class="form-field">
-                <label>11. Geographical Location</label>
+                <label th:text="#{form.location}">11. Geographical Location</label>
                 <div class="radio-group">
                     <div class="radio-option">
-                        <input type="radio" th:field="*{location}" value="Urban" /> Urban
+                        <input type="radio" th:field="*{location}" value="Urban" />
+                        <span th:text="#{location.urban}">Urban</span>
                     </div>
                     <div class="radio-option">
-                        <input type="radio" th:field="*{location}" value="Rural" /> Rural
+                        <input type="radio" th:field="*{location}" value="Rural" /> 
+                        <span th:text="#{location.rural}">Rural</span>
                     </div>
                     <div class="radio-option">
-                        <input type="radio" th:field="*{location}" value="Semi Urban" /> Semi Urban
+                        <input type="radio" th:field="*{location}" value="Semi Urban" /> 
+                        <span th:text="#{location.semiurban}">Semi Urban</span>
                     </div>
                 </div>
                 <div class="error" th:if="${#fields.hasErrors('location')}" th:errors="*{location}"></div>
             </div>
 
             <div class="form-field">
-                <label>12. Access to Technology</label>
+                <label th:text="#{form.techAccess}">12. Access to Technology</label>
                 <div class="radio-group">
                     <div class="radio-option">
-                        <input type="radio" th:field="*{techAccess}" value="Full Access" /> Full Access (High-speed internet, own device)
+                        <input type="radio" th:field="*{techAccess}" value="Full Access" /> 
+                        <span th:text="#{techAccess.full}">Full Access (High-speed internet, own device)</span>
                     </div>
                     <div class="radio-option">
-                        <input type="radio" th:field="*{techAccess}" value="Limited Access" /> Limited Access (Shared device, slow/no internet)
+                        <input type="radio" th:field="*{techAccess}" value="Limited Access" />
+                        <span th:text="#{techAccess.limited}">Limited Access (Shared device, slow/no internet)</span> 
                     </div>
                 </div>
                 <div class="error" th:if="${#fields.hasErrors('techAccess')}" th:errors="*{techAccess}"></div>
@@ -278,42 +322,43 @@
             </div>
 
 
-			 <fieldset th:object="${surveyResponse}"> 
-            <div class="form-header">PART II</div>
+
+
+			 <fieldset class="form-fieldset" th:object="${surveyResponse}"> 
+            <div class="form-header" th:text="#{form.part2}">PART II</div>
              <div class="form-section">
             <div style="margin-bottom: 30px;">
                 
                 <table style="width: 100%; border-collapse: collapse; border: 1px solid #333; margin-bottom: 20px;">
                     <tr>
                         <td style="border: 1px solid #333; padding: 8px; width: 50%;">
-                            <p>Please indicate your level of agreement with each statement using the following scale: 1
-                                - Strongly Disagree, 2 - Disagree, 3 - Neutral, 4 - Agree, 5 - Strongly Agree  </p>
+                        <p th:text="#{survey.instructions.agreement}">Please indicate your level of agreement with each statement using the following scale: 1
+                                - Strongly Disagree, 2 - Disagree, 3 - Neutral, 4 - Agree, 5 - Strongly Agree </p>
                         </td>
                         <td style="border: 1px solid #333; padding: 8px; width: 50%;">
-                            <p>Instructions: For each scenario below, rank the four options by writing 1 (most
+                        <p th:text="#{survey.instructions.ranking}">Instructions: For each scenario below, rank the four options by writing 1 (most
                                 preferred) through 4 (least preferred) in the parentheses. Use each rank only once per
-                                row.</p>
+                                row</p>
                         </td>
                     </tr>
                 </table>
-
-                <h3 style="text-align: center; margin-bottom: 15px;">PART B: Teaching Quality (ex-SERVQUAL Reliability +
+						<h3 style="text-align: center; margin-bottom: 15px;" th:text="#{survey.partb.title}">PART B: Teaching Quality(ex-SERVQUAL Reliability +
                     Assurance)</h3>
-
                 <table style="width: 100%; border-collapse: collapse; border: 1px solid #333;">
                     <thead>
                         <tr>
-                            <th style="border: 1px solid #333; padding: 8px; width: 10%;">Code</th>
-                            <th style="border: 1px solid #333; padding: 8px; width: 25%;">Aspect</th>
-                            <th style="border: 1px solid #333; padding: 8px; width: 20%;">Satisfaction (1-5)</th>
-                            <th style="border: 1px solid #333; padding: 8px; width: 45%;">If Improvements Happen, Rank 1
+				             <th style="border: 1px solid #333; padding: 8px; width: 10%;" th:text="#{table.header.code}">Code</th>
+				            <th style="border: 1px solid #333; padding: 8px; width: 25%;" th:text="#{table.header.aspect}">Aspect</th>
+				            <th style="border: 1px solid #333; padding: 8px; width: 20%;" th:text="#{table.header.satisfaction}">Satisfaction(1-5)</th>
+				            <th style="border: 1px solid #333; padding: 8px; width: 45%;" th:text="#{table.header.ranking}">If Improvements Happen, Rank 1
                                 to 4. "Use each rank only per row. 1 = most helpful, 4 = least helpful."</th>
+                        	
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td style="border: 1px solid #333; padding: 8px; text-align: center; font-weight: bold;">IQ01</td>
-                            <td style="border: 1px solid #333; padding: 8px;">Learning goals are clearly communicated
+                            <td style="border: 1px solid #333; padding: 8px;" th:text="#{IQ01.aspect}">Learning goals are clearly communicated
                             </td>
                             <td style="border: 1px solid #333; padding: 8px;">
                                 <div style="display: flex; flex-direction: column;">
@@ -330,19 +375,21 @@
                                 <div class="error" th:if="${#fields.hasErrors('iq01Satisfaction')}" th:errors="*{iq01Satisfaction}"></div>
                             </td>
                             <td style="border: 1px solid #333; padding: 8px;">
-						    Pre-session briefs 
+                            	<span th:text="#{IQ01.rank.option1}">Pre-session briefs</span>
+						     
 						    <input type="number" class="form-input rank-group" data-group="iq01" style="width: 45px; height: 25px;" 
 						           th:field="*{iq01Rank1}" min="1" max="4" value="1" required>
 						
-						    Visual summaries 
+						    
+						    <span th:text="#{IQ01.rank.option2}">Visual summaries </span>
 						    <input type="number" class="form-input rank-group" data-group="iq01" style="width: 45px; height: 25px;" 
 						           th:field="*{iq01Rank2}" min="1" max="4" value="2" required><br>
 						
-						    Live Q&A sessions 
+						    <span th:text="#{IQ01.rank.option3}">Live Q&A sessions </span>
 						    <input type="number" class="form-input rank-group" data-group="iq01" style="width: 45px; height: 25px;" 
 						           th:field="*{iq01Rank3}" min="1" max="4" value="3" required>
 						
-						    Current Approach is Effective 
+						    <span th:text="#{IQ01.rank.option4}">Current Approach is Effective </span>
 						    <input type="number" class="form-input rank-group" data-group="iq01" style="width: 45px; height: 25px;" 
 						           th:field="*{iq01Rank4}" min="1" max="4" value="4" required>
 						</td>
@@ -350,7 +397,7 @@
                         </tr>
                         <tr>
                             <td style="border: 1px solid #333; padding: 8px; text-align: center; font-weight: bold;">IQ02</td>
-                            <td style="border: 1px solid #333; padding: 8px;">Course content aligns well with the
+                            <td style="border: 1px solid #333; padding: 8px;" th:text="#{IQ02.aspect}">Course content aligns well with the
                                 syllabus</td>
                             <td style="border: 1px solid #333; padding: 8px;">
                                 <div style="display: flex; flex-direction: column;">
@@ -367,27 +414,30 @@
                                 <div class="error" th:if="${#fields.hasErrors('iq02Satisfaction')}" th:errors="*{iq02Satisfaction}"></div>
                             </td>
                             <td style="border: 1px solid #333; padding: 8px;">
-			    Real-time updates 
-			    <input type="number" class="form-input rank-group" data-group="iq02" 
-			           style="width: 45px; height: 25px;" th:field="*{iq02Rank1}" min="1" max="4" value="1" required> 
-			
-			    Personalized syllabus guides
-			    <input type="number" class="form-input rank-group" data-group="iq02" 
-			           style="width: 45px; height: 25px;" th:field="*{iq02Rank2}" min="1" max="4" value="2" required><br>
-			
-			    Supplementary modules 
-			    <input type="number" class="form-input rank-group" data-group="iq02" 
-			           style="width: 45px; height: 25px;" th:field="*{iq02Rank3}" min="1" max="4" value="3" required> 
-			
-			    Current Approach is Effective
-			    <input type="number" class="form-input rank-group" data-group="iq02" 
-			           style="width: 45px; height: 25px;" th:field="*{iq02Rank4}" min="1" max="4" value="4" required>
-</td>
+			     
+							    <span th:text="#{IQ02.rank.option1}">Real-time updates </span>
+							    <input type="number" class="form-input rank-group" data-group="iq02" 
+							           style="width: 45px; height: 25px;" th:field="*{iq02Rank1}" min="1" max="4" value="1" required> 
+	
+							    <span th:text="#{IQ02.rank.option2}">Personalized syllabus guides </span>
+							    <input type="number" class="form-input rank-group" data-group="iq02" 
+							           style="width: 45px; height: 25px;" th:field="*{iq02Rank2}" min="1" max="4" value="2" required><br>
+							
+							   
+							    <span th:text="#{IQ02.rank.option3}"> Supplementary modules  </span>
+							    <input type="number" class="form-input rank-group" data-group="iq02" 
+							           style="width: 45px; height: 25px;" th:field="*{iq02Rank3}" min="1" max="4" value="3" required> 
+							
+							    
+							    <span th:text="#{IQ02.rank.option4}">Current Approach is Effective </span>
+							    <input type="number" class="form-input rank-group" data-group="iq02" 
+							           style="width: 45px; height: 25px;" th:field="*{iq02Rank4}" min="1" max="4" value="4" required>
+				</td>
 
                         </tr>
                         <tr>
                             <td style="border: 1px solid #333; padding: 8px; text-align: center; font-weight: bold;">IQ03</td>
-                            <td style="border: 1px solid #333; padding: 8px;">Faculty explain lessons clearly</td>
+                            <td style="border: 1px solid #333; padding: 8px;" th:text="#{IQ03.aspect}">Faculty explain lessons clearly</td>
                             <td style="border: 1px solid #333; padding: 8px;">
                                 <div style="display: flex; flex-direction: column;">
                                     <div style="display: flex; justify-content: space-around; margin-bottom: 5px;">
@@ -403,19 +453,23 @@
                                 <div class="error" th:if="${#fields.hasErrors('iq03Satisfaction')}" th:errors="*{iq03Satisfaction}"></div>
                             </td>
                             <td style="border: 1px solid #333; padding: 8px;">
-								    Recorded sessions 
+								     
+								    <span th:text="#{IQ03.rank.option1}">Recorded sessions </span>
 								    <input type="number" class="form-input rank-group" data-group="iq03" 
 								           style="width: 45px; height: 25px;" th:field="*{iq03Rank1}" min="1" max="4" value="1" required>
 								
-								    Classroom evaluations 
+								    
+								    <span th:text="#{IQ03.rank.option2}"> Classroom evaluations </span>
 								    <input type="number" class="form-input rank-group" data-group="iq03" 
 								           style="width: 45px; height: 25px;" th:field="*{iq03Rank2}" min="1" max="4" value="2" required><br>
 								
-								    Q&A follow-ups 
+								     
+								    <span th:text="#{IQ03.rank.option3}">Q&A follow-ups </span>
 								    <input type="number" class="form-input rank-group" data-group="iq03" 
 								           style="width: 45px; height: 25px;" th:field="*{iq03Rank3}" min="1" max="4" value="3" required>
 								
-								    Current Approach is Effective 
+								     
+								    <span th:text="#{IQ03.rank.option4}">Current Approach is Effective </span>
 								    <input type="number" class="form-input rank-group" data-group="iq03" 
 								           style="width: 45px; height: 25px;" th:field="*{iq03Rank4}" min="1" max="4" value="4" required>
 								</td>
@@ -423,7 +477,7 @@
                         </tr>
                         <tr>
                             <td style="border: 1px solid #333; padding: 8px; text-align: center; font-weight: bold;">IQ04</td>
-                            <td style="border: 1px solid #333; padding: 8px;">Evaluations are fair and transparent</td>
+                            <td style="border: 1px solid #333; padding: 8px;" th:text="#{IQ04.aspect}">Evaluations are fair and transparent</td>
                             <td style="border: 1px solid #333; padding: 8px;">
                                 <div style="display: flex; flex-direction: column;">
                                     <div style="display: flex; justify-content: space-around; margin-bottom: 5px;">
@@ -439,19 +493,23 @@
                                 <div class="error" th:if="${#fields.hasErrors('iq04Satisfaction')}" th:errors="*{iq04Satisfaction}"></div>
                             </td>
                             <td style="border: 1px solid #333; padding: 8px;">
-							    Clear grading rules 
+							     
+							    <span th:text="#{IQ04.rank.option1}">Clear grading rules </span>
 							    <input type="number" class="form-input rank-group" data-group="iq04"
 							           style="width: 45px; height: 25px;" th:field="*{iq04Rank1}" min="1" max="4" value="1" required>
 							
-							    Peer-review insights
+							    
+							    <span th:text="#{IQ04.rank.option2}">Peer-review insights </span>
 							    <input type="number" class="form-input rank-group" data-group="iq04"
 							           style="width: 45px; height: 25px;" th:field="*{iq04Rank2}" min="1" max="4" value="2" required><br>
 							
-							    OCR-based answer checking 
+							    
+							    <span th:text="#{IQ04.rank.option3}">OCR-based answer checking  </span>
 							    <input type="number" class="form-input rank-group" data-group="iq04"
 							           style="width: 45px; height: 25px;" th:field="*{iq04Rank3}" min="1" max="4" value="3" required>
 							
-							    Current Approach is Effective 
+							     
+							    <span th:text="#{IQ04.rank.option4}">Current Approach is Effective </span>
 							    <input type="number" class="form-input rank-group" data-group="iq04"
 							           style="width: 45px; height: 25px;" th:field="*{iq04Rank4}" min="1" max="4" value="4" required>
 							</td>
@@ -459,7 +517,7 @@
                         </tr>
                         <tr>
                             <td style="border: 1px solid #333; padding: 8px; text-align: center; font-weight: bold;">IQ05</td>
-                            <td style="border: 1px solid #333; padding: 8px;">I trust the academic advice and support I
+                            <td style="border: 1px solid #333; padding: 8px;" th:text="#{IQ05.aspect}">I trust the academic advice and support I
                                 receive</td>
                             <td style="border: 1px solid #333; padding: 8px;">
                                 <div style="display: flex; flex-direction: column;">
@@ -476,19 +534,23 @@
                                 <div class="error" th:if="${#fields.hasErrors('iq05Satisfaction')}" th:errors="*{iq05Satisfaction}"></div>
                             </td>
                             <td style="border: 1px solid #333; padding: 8px;">
-							    Faculty-led seminars 
+							     
+							    <span th:text="#{IQ05.rank.option1}">Faculty-led seminars </span>
 							    <input type="number" class="form-input rank-group" data-group="iq05" 
 							           style="width: 45px; height: 25px;" th:field="*{iq05Rank1}" min="1" max="4" value="1" required>
 							
-							    Group case projects 
+							   
+							    <span th:text="#{IQ05.rank.option2}"> Group case projects  </span>
 							    <input type="number" class="form-input rank-group" data-group="iq05" 
 							           style="width: 45px; height: 25px;" th:field="*{iq05Rank2}" min="1" max="4" value="2" required><br>
 							
-							    Workshops on how to do projects/research 
+							     
+							    <span th:text="#{IQ05.rank.option3}">Workshops on how to do projects/research </span>
 							    <input type="number" class="form-input rank-group" data-group="iq05" 
 							           style="width: 45px; height: 25px;" th:field="*{iq05Rank3}" min="1" max="4" value="3" required>
 							
-							    Current Approach is Effective 
+							     
+							    <span th:text="#{IQ05.rank.option4}">Current Approach is Effective </span>
 							    <input type="number" class="form-input rank-group" data-group="iq05" 
 							           style="width: 45px; height: 25px;" th:field="*{iq05Rank4}" min="1" max="4" value="4" required>
 							</td>
@@ -496,7 +558,7 @@
                         </tr>
                         <tr>
                             <td style="border: 1px solid #333; padding: 8px; text-align: center; font-weight: bold;">IQ06</td>
-                            <td style="border: 1px solid #333; padding: 8px;">The program is managed professionally and
+                            <td style="border: 1px solid #333; padding: 8px;" th:text="#{IQ06.aspect}">The program is managed professionally and
                                 efficiently</td>
                             <td style="border: 1px solid #333; padding: 8px;">
                                 <div style="display: flex; flex-direction: column;">
@@ -513,48 +575,119 @@
                                 <div class="error" th:if="${#fields.hasErrors('iq06Satisfaction')}" th:errors="*{iq06Satisfaction}"></div>
                             </td>
                                 <td style="border: 1px solid #333; padding: 8px;">
-									    Real-time dashboards 
+									     
+									    <span th:text="#{IQ06.rank.option1}">Real-time dashboards </span>
 									    <input type="number" class="form-input rank-group" data-group="iq06" 
 									           style="width: 45px; height: 25px;" th:field="*{iq06Rank1}" min="1" max="4" value="1" required>
 									
-									    Periodic progress reports
+									    
+									    <span th:text="#{IQ06.rank.option2}">Periodic progress reports </span>
 									    <input type="number" class="form-input rank-group" data-group="iq06" 
 									           style="width: 45px; height: 25px;" th:field="*{iq06Rank2}" min="1" max="4" value="2" required><br>
 									
-									    Student advisory meetings
+									    
+									    <span th:text="#{IQ06.rank.option3}">Student advisory meetings </span>
 									    <input type="number" class="form-input rank-group" data-group="iq06" 
 									           style="width: 45px; height: 25px;" th:field="*{iq06Rank3}" min="1" max="4" value="3" required>
 									
-									    Current Approach is Effective
+									    
+									    <span th:text="#{IQ06.rank.option4}">Current Approach is Effective </span>
 									    <input type="number" class="form-input rank-group" data-group="iq06" 
 									           style="width: 45px; height: 25px;" th:field="*{iq06Rank4}" min="1" max="4" value="4" required>
 									</td>
 
                         </tr>
                     </tbody>
-                </table>
+                </table> 
+                
+                <!-- <table style="width: 100%; border-collapse: collapse; border: 1px solid #333; margin-bottom: 20px;">
+    <tr>
+        <td style="border: 1px solid #333; padding: 8px; width: 50%;">
+            <p th:text="#{survey.instructions.agreement}">[Instruction text]</p>
+        </td>
+        <td style="border: 1px solid #333; padding: 8px; width: 50%;">
+            <p th:text="#{survey.instructions.ranking}">[Ranking instruction text]</p>
+        </td>
+    </tr>
+</table>
+
+<h3 style="text-align: center; margin-bottom: 15px;" th:text="#{survey.partb.title}">PART B: Teaching Quality</h3>
+
+<table style="width: 100%; border-collapse: collapse; border: 1px solid #333;">
+    <thead>
+        <tr>
+            <th style="border: 1px solid #333; padding: 8px; width: 10%;" th:text="#{table.header.code}">Code</th>
+            <th style="border: 1px solid #333; padding: 8px; width: 25%;" th:text="#{table.header.aspect}">Aspect</th>
+            <th style="border: 1px solid #333; padding: 8px; width: 20%;" th:text="#{table.header.satisfaction}">Satisfaction</th>
+            <th style="border: 1px solid #333; padding: 8px; width: 45%;" th:text="#{table.header.ranking}">Ranking Options</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="i : ${#numbers.sequence(1, 6)}"
+            th:with="code=${'IQ0' + i},
+                     satField=${'iq0' + i + 'Satisfaction'},
+                     rank1=${'iq0' + i + 'Rank1'},
+                     rank2=${'iq0' + i + 'Rank2'},
+                     rank3=${'iq0' + i + 'Rank3'},
+                     rank4=${'iq0' + i + 'Rank4'}">
+
+            <td style="border: 1px solid #333; padding: 8px; text-align: center; font-weight: bold;" th:text="${code}">IQ01</td>
+
+            <td style="border: 1px solid #333; padding: 8px;" th:text="#{${code}.aspect}">Aspect</td>
+
+            <td style="border: 1px solid #333; padding: 8px;">
+                <div style="display: flex; flex-direction: column;">
+                    <div style="display: flex; justify-content: space-around; margin-bottom: 5px;">
+                        <label><input type="radio" th:field="*{__${satField}__}" value="1">1</label>
+                        <label><input type="radio" th:field="*{__${satField}__}" value="2">2</label>
+                        <label><input type="radio" th:field="*{__${satField}__}" value="3">3</label>
+                    </div>
+                    <div style="display: flex; justify-content: space-around;">
+                        <label><input type="radio" th:field="*{__${satField}__}" value="4">4</label>
+                        <label><input type="radio" th:field="*{__${satField}__}" value="5">5</label>
+                    </div>
+                </div>
+                <div class="error" th:if="${#fields.hasErrors(satField)}" th:errors="*{__${satField}__}"></div>
+            </td>
+
+            <td style="border: 1px solid #333; padding: 8px;">
+                <span th:text="#{${code}.rank.option1}">Option 1</span>
+                <input type="number" th:field="*{__${rank1}__}" min="1" max="4" style="width: 45px; height: 25px;" required>
+
+                <span th:text="#{${code}.rank.option2}">Option 2</span>
+                <input type="number" th:field="*{__${rank2}__}" min="1" max="4" style="width: 45px; height: 25px;" required><br>
+
+                <span th:text="#{${code}.rank.option3}">Option 3</span>
+                <input type="number" th:field="*{__${rank3}__}" min="1" max="4" style="width: 45px; height: 25px;" required>
+
+                <span th:text="#{${code}.rank.option4}">Option 4</span>
+                <input type="number" th:field="*{__${rank4}__}" min="1" max="4" style="width: 45px; height: 25px;" required>
+            </td>
+        </tr>
+    </tbody>
+</table>
+                 -->
+                
             </div>
 
             <div style="margin-bottom: 30px;">
-
-
-                <h3 style="text-align: center; margin-bottom: 15px;">PART C: Self-Check Learning & Feedback Integration
+                <h3 style="text-align: center; margin-bottom: 15px;" th:text="#{survey.partc.title}">PART C: Self-Check Learning & Feedback Integration
                     (new dimension - synthesized)</h3>
 
                 <table style="width: 100%; border-collapse: collapse; border: 1px solid #333;">
                     <thead>
                         <tr>
-                            <th style="border: 1px solid #333; padding: 8px; width: 10%;">Code</th>
-                            <th style="border: 1px solid #333; padding: 8px; width: 25%;">Aspect</th>
-                            <th style="border: 1px solid #333; padding: 8px; width: 20%;">Satisfaction (1-5)</th>
-                            <th style="border: 1px solid #333; padding: 8px; width: 45%;">If Improvements Happen, Rank
-                                1–4. "Use each rank only per row. 1 = most helpful, 4 = least helpful."</th>
+                        	<th style="border: 1px solid #333; padding: 8px; width: 10%;" th:text="#{table.header.code}">Code</th>
+				            <th style="border: 1px solid #333; padding: 8px; width: 25%;" th:text="#{table.header.aspect}">Aspect</th>
+				            <th style="border: 1px solid #333; padding: 8px; width: 20%;" th:text="#{table.header.satisfaction}">Satisfaction(1-5)</th>
+				            <th style="border: 1px solid #333; padding: 8px; width: 45%;" th:text="#{table.header.ranking}">If Improvements Happen, Rank 1
+                                to 4. "Use each rank only per row. 1 = most helpful, 4 = least helpful."</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td style="border: 1px solid #333; padding: 8px; text-align: center; font-weight: bold;">RLFB01</td>
-                            <td style="border: 1px solid #333; padding: 8px;">I receive timely feedback that helps me
+                            <td style="border: 1px solid #333; padding: 8px;" th:text="#{RLFB01.aspect}">I receive timely feedback that helps me
                                 improve</td>
                             <td style="border: 1px solid #333; padding: 8px;">
                                 <div style="display: flex; flex-direction: column;">
@@ -571,19 +704,21 @@
                                 <div class="error" th:if="${#fields.hasErrors('rlfb01Satisfaction')}" th:errors="*{rlfb01Satisfaction}"></div>
                             </td>
                             <td style="border: 1px solid #333; padding: 8px;">
-							    Faster feedback turnaround 
+							     
+							    <span th:text="#{RLFB01.rank.option1}">Faster feedback turnaround</span>
 							    <input type="number" class="form-input rank-input" style="width: 45px; height: 25px;"
 							           th:field="*{rlfb01Rank1}" min="1" max="4" value="1" required><br>
 							
-							    Online feedback access 
+							    <span th:text="#{RLFB01.rank.option2}">Online feedback access </span>
 							    <input type="number" class="form-input rank-input" style="width: 45px; height: 25px;"
 							           th:field="*{rlfb01Rank2}" min="1" max="4" value="2" required><br>
-							
-							    Clear expectations shared 
+								    
+							    <span th:text="#{RLFB01.rank.option3}">Clear expectations shared </span>
 							    <input type="number" class="form-input rank-input" style="width: 45px; height: 25px;"
 							           th:field="*{rlfb01Rank3}" min="1" max="4" value="3" required><br>
 							
-							    Current approach is effective 
+							    
+							    <span th:text="#{RLFB01.rank.option4}">Current approach is Effective </span>
 							    <input type="number" class="form-input rank-input" style="width: 45px; height: 25px;"
 							           th:field="*{rlfb01Rank4}" min="1" max="4" value="4" required>
 							</td>
@@ -595,8 +730,8 @@
             
             
 
-            <div style="text-align: center; margin-top: 20px;">
-                 <button type="submit">Submit</button>
+           			 <div style="text-align: center; margin-top: 20px;">
+                 <button type="submit" th:text="#{form.submit}">Submit</button>
             </div>
         </form>
     </div>
